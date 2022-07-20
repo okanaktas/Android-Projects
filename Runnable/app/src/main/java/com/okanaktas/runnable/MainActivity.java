@@ -1,21 +1,20 @@
 package com.okanaktas.runnable;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.os.Handler;
+import android.os.Bundle;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
 
+    TextView textView;
+    int number;
     Runnable runnable;
     Handler handler;
-    TextView textView;
-    Button buttonStart, buttonStop;
-
-    int number;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,38 +22,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textView = findViewById(R.id.textView);
-        buttonStart = findViewById(R.id.buttonStart);
-        buttonStop = findViewById(R.id.buttonStop);
-
+        button = findViewById(R.id.buttonStart);
         number = 0;
     }
 
-    public void buttonStart(View view) {
-        handler = new Handler();
+    public void start (View view) {
+
+        handler = new Handler(Looper.getMainLooper());
 
         runnable = new Runnable() {
             @Override
             public void run() {
-
-                textView.setText("Time: "+ number);
+                textView.setText("Time: " + number);
                 number++;
-                textView.setText("Time: "+ number);
+                textView.setText("Time: " + number);
                 handler.postDelayed(runnable,1000);
+
             }
         };
 
         handler.post(runnable);
-        buttonStart.setEnabled(false);
-
+        button.setEnabled(false);
 
     }
 
-    public void buttonStop(View view) {
-        buttonStart.setEnabled(true);
+    public void stop (View view) {
+        button.setEnabled(true);
 
         handler.removeCallbacks(runnable);
         number = 0;
         textView.setText("Time: " + number);
-    }
 
+    }
 }
