@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         arrayListLandMark.add(colosseum);
         arrayListLandMark.add(london_bridge);
 
+        /*
         //mapping
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1, arrayListLandMark.stream().map(landMark -> landMark.name).collect(Collectors.toList())
@@ -57,5 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+         */
     }
 }
